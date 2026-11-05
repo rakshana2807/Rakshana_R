@@ -4,7 +4,6 @@ export const CustomCursor: React.FC = () => {
   const [pos, setPos] = useState({ x: -100, y: -100 });
   const [trailingPos, setTrailingPos] = useState({ x: -100, y: -100 });
   const [isHovered, setIsHovered] = useState(false);
-  const [isClicking, setIsClicking] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
 
@@ -34,32 +33,26 @@ export const CustomCursor: React.FC = () => {
       }
     };
 
-    const onMouseDown = () => setIsClicking(true);
-    const onMouseUp = () => setIsClicking(false);
     const onMouseLeave = () => setIsVisible(false);
 
-    window.addEventListener('mousemove', onMouseMove);
-    window.addEventListener('mousedown', onMouseDown);
-    window.addEventListener('mouseup', onMouseUp);
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
     document.addEventListener('mouseleave', onMouseLeave);
 
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
-      window.removeEventListener('mousedown', onMouseDown);
-      window.removeEventListener('mouseup', onMouseUp);
       document.removeEventListener('mouseleave', onMouseLeave);
     };
   }, [isVisible]);
 
-  // Smooth lerp for trailing ring
+  // Smooth gentle lerp for trailing aura
   useEffect(() => {
     if (isTouchDevice) return;
 
     let animId: number;
     const lerp = () => {
       setTrailingPos((prev) => ({
-        x: prev.x + (pos.x - prev.x) * 0.18,
-        y: prev.y + (pos.y - prev.y) * 0.18,
+        x: prev.x + (pos.x - prev.x) * 0.22,
+        y: prev.y + (pos.y - prev.y) * 0.22,
       }));
       animId = requestAnimationFrame(lerp);
     };
@@ -72,30 +65,27 @@ export const CustomCursor: React.FC = () => {
 
   return (
     <>
-      {/* Center dot */}
+      {/* Sleek minimal center dot */}
       <div
-        className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full bg-electric-violet mix-blend-screen transition-transform duration-75"
+        className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full bg-[#F5F5F7] transition-transform duration-75 ease-out"
         style={{
-          width: '8px',
-          height: '8px',
-          transform: `translate3d(${pos.x - 4}px, ${pos.y - 4}px, 0) scale(${
-            isClicking ? 0.6 : isHovered ? 1.4 : 1
+          width: '5px',
+          height: '5px',
+          transform: `translate3d(${pos.x - 2.5}px, ${pos.y - 2.5}px, 0) scale(${
+            isHovered ? 1.6 : 1
           })`,
-          boxShadow: '0 0 12px #8b5cf6',
         }}
       />
-      {/* Outer trailing aura */}
+      {/* Subtle trailing ring */}
       <div
-        className="fixed top-0 left-0 pointer-events-none z-[9998] rounded-full border border-purple-400/50 bg-purple-500/10 backdrop-blur-[1px] transition-all duration-300 ease-out"
+        className="fixed top-0 left-0 pointer-events-none z-[9998] rounded-full border border-white/20 transition-all duration-300 ease-out"
         style={{
-          width: isHovered ? '56px' : '36px',
-          height: isHovered ? '56px' : '36px',
-          transform: `translate3d(${trailingPos.x - (isHovered ? 28 : 18)}px, ${
-            trailingPos.y - (isHovered ? 28 : 18)
-          }px, 0) scale(${isClicking ? 0.85 : 1})`,
-          boxShadow: isHovered
-            ? '0 0 24px rgba(139, 92, 246, 0.4), inset 0 0 12px rgba(99, 102, 241, 0.2)'
-            : '0 0 15px rgba(139, 92, 246, 0.15)',
+          width: isHovered ? '42px' : '26px',
+          height: isHovered ? '42px' : '26px',
+          transform: `translate3d(${trailingPos.x - (isHovered ? 21 : 13)}px, ${
+            trailingPos.y - (isHovered ? 21 : 13)
+          }px, 0)`,
+          borderColor: isHovered ? 'rgba(155, 109, 255, 0.4)' : 'rgba(255, 255, 255, 0.15)',
         }}
       />
     </>

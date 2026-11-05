@@ -9,11 +9,7 @@ import {
   Mail,
   Phone,
   MapPin,
-  Award,
-  GraduationCap,
-  Briefcase,
   CheckCircle2,
-  FolderGit2
 } from 'lucide-react';
 
 interface ResumeModalProps {
@@ -45,7 +41,6 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
 
   const handleDownload = () => {
     soundEffects.playSelect();
-    // Attempt download of /resume.pdf if present, or inform user
     const link = document.createElement('a');
     link.href = PORTFOLIO_DATA.personal.resumeUrl;
     link.download = 'Rakshana_R_Resume.pdf';
@@ -55,40 +50,33 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
   };
 
   return (
-    <div className="fixed inset-0 z-[1000] flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-xl animate-in fade-in duration-300">
+    <div className="fixed inset-0 z-[1000] flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md animate-fade-in">
       <div
-        className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto rounded-3xl bg-[#090916] border border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.9)] p-5 sm:p-8 text-left"
+        className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-2xl bg-[#0D0E15] border border-white/10 shadow-2xl p-6 sm:p-8 text-left"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header Controls */}
-        <div className="flex items-center justify-between pb-4 mb-6 border-b border-white/10">
+        <div className="flex items-center justify-between pb-4 mb-6 border-b border-white/[0.06]">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-purple-500/20 text-purple-300 flex items-center justify-center">
-              <FileText size={16} />
-            </div>
-            <div>
-              <span className="font-display font-bold text-base text-white">
-                Curriculum Vitae Preview
-              </span>
-              <span className="text-[11px] font-mono text-cyan-400 block -mt-0.5">
-                Rakshana R. &bull; Verified Profile
-              </span>
-            </div>
+            <FileText size={16} className="text-[#9B6DFF]" />
+            <span className="font-display font-semibold text-sm text-[#F5F5F7]">
+              Curriculum Vitae Preview
+            </span>
           </div>
 
           <div className="flex items-center gap-2">
             <button
               onClick={handlePrint}
-              className="p-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition-colors"
-              title="Print Document"
+              className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-[#A4A4B0] hover:text-white transition-colors"
+              title="Print"
             >
-              <Printer size={16} />
+              <Printer size={15} />
             </button>
             <button
               onClick={handleDownload}
-              className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-semibold flex items-center gap-1.5 transition-all shadow-[0_0_15px_rgba(139,92,246,0.3)]"
+              className="px-3 py-1.5 rounded-lg bg-[#9B6DFF] hover:bg-[#8A58F5] text-white text-xs font-medium flex items-center gap-1.5 transition-colors"
             >
-              <Download size={14} />
+              <Download size={13} />
               <span>Download PDF</span>
             </button>
             <button
@@ -96,99 +84,87 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
                 soundEffects.playSelect();
                 onClose();
               }}
-              className="p-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition-colors"
-              aria-label="Close Resume"
+              className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-[#A4A4B0] hover:text-white transition-colors"
+              aria-label="Close"
             >
-              <X size={16} />
+              <X size={15} />
             </button>
           </div>
         </div>
 
-        {/* Upload-Ready Asset Notification Pill */}
-        <div className="p-3 mb-6 rounded-2xl bg-purple-950/30 border border-purple-500/30 flex items-center justify-between text-xs font-mono text-purple-300">
-          <span>&bull; Ready-for-upload target: <code className="bg-white/10 px-1.5 py-0.5 rounded text-white">/public/resume.pdf</code></span>
-          <span className="text-cyan-400 text-[11px]">Syncs directly with download action</span>
-        </div>
-
-        {/* Printable Resume Document Container */}
-        <div className="bg-[#0e0e1c] p-6 sm:p-9 rounded-2xl border border-white/5 space-y-6 text-slate-200">
+        {/* Minimal Document Sheet */}
+        <div className="space-y-6 text-[#A4A4B0] text-xs sm:text-sm font-light">
           
-          {/* Header Block */}
-          <div className="pb-6 border-b border-white/10 flex flex-col sm:flex-row justify-between sm:items-end gap-4">
+          {/* Identity */}
+          <div className="pb-5 border-b border-white/[0.06] flex flex-col sm:flex-row justify-between sm:items-end gap-3">
             <div>
-              <h1 className="font-display text-3xl font-black text-white tracking-wide">
+              <h1 className="font-display text-2xl font-bold text-[#F5F5F7]">
                 {PORTFOLIO_DATA.personal.name}
               </h1>
-              <p className="font-mono text-xs text-purple-400 mt-1">
-                UI/UX Designer &bull; Frontend Developer &bull; Creative Builder
+              <p className="font-mono text-xs text-[#9B6DFF] mt-0.5">
+                UI/UX Designer &bull; Frontend Developer
               </p>
             </div>
-            <div className="space-y-1 text-xs font-mono text-slate-300">
+            <div className="space-y-0.5 text-xs font-mono text-[#A4A4B0]">
               <div className="flex items-center gap-1.5">
-                <Mail size={12} className="text-cyan-400" />
-                <a href={`mailto:${PORTFOLIO_DATA.personal.email}`} className="hover:underline">
-                  {PORTFOLIO_DATA.personal.email}
-                </a>
+                <Mail size={11} className="text-[#56BFFF]" />
+                <span>{PORTFOLIO_DATA.personal.email}</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <Phone size={12} className="text-cyan-400" />
-                <a href={`tel:${PORTFOLIO_DATA.personal.phone}`} className="hover:underline">
-                  {PORTFOLIO_DATA.personal.phone}
-                </a>
+                <Phone size={11} className="text-[#56BFFF]" />
+                <span>{PORTFOLIO_DATA.personal.phone}</span>
               </div>
-              <div className="flex items-center gap-1.5 text-slate-400">
-                <MapPin size={12} className="text-cyan-400" />
+              <div className="flex items-center gap-1.5">
+                <MapPin size={11} className="text-[#56BFFF]" />
                 <span>{PORTFOLIO_DATA.personal.location}</span>
               </div>
             </div>
           </div>
 
-          {/* Professional Summary */}
+          {/* Summary */}
           <div>
-            <h2 className="font-display text-sm font-bold text-white tracking-widest uppercase mb-2 text-purple-300">
-              Professional Summary
+            <h2 className="font-mono text-xs uppercase tracking-widest text-[#F5F5F7] font-semibold mb-1.5">
+              Summary
             </h2>
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <p className="leading-relaxed">
               {PORTFOLIO_DATA.personal.introParagraph}
             </p>
           </div>
 
           {/* Education */}
           <div>
-            <h2 className="font-display text-sm font-bold text-white tracking-widest uppercase mb-2 text-purple-300 flex items-center gap-1.5">
-              <GraduationCap size={15} />
-              <span>Education</span>
+            <h2 className="font-mono text-xs uppercase tracking-widest text-[#F5F5F7] font-semibold mb-1.5">
+              Education
             </h2>
             {PORTFOLIO_DATA.education.map((edu, i) => (
-              <div key={i} className="text-xs sm:text-sm">
-                <div className="flex justify-between font-semibold text-white">
+              <div key={i} className="mb-2">
+                <div className="flex justify-between font-medium text-[#F5F5F7]">
                   <span>{edu.degree}</span>
-                  <span className="font-mono text-slate-400 text-xs">{edu.duration}</span>
+                  <span className="font-mono text-xs text-[#A4A4B0]">{edu.duration}</span>
                 </div>
-                <div className="text-cyan-400 text-xs font-medium">{edu.institution} &bull; {edu.location}</div>
-                <p className="text-xs text-slate-300 mt-1">{edu.description}</p>
+                <div className="text-xs text-[#56BFFF]">{edu.institution} &bull; {edu.location}</div>
+                <p className="mt-1 leading-relaxed">{edu.description}</p>
               </div>
             ))}
           </div>
 
-          {/* Internship Experience */}
+          {/* Experience */}
           <div>
-            <h2 className="font-display text-sm font-bold text-white tracking-widest uppercase mb-2 text-purple-300 flex items-center gap-1.5">
-              <Briefcase size={15} />
-              <span>Experience</span>
+            <h2 className="font-mono text-xs uppercase tracking-widest text-[#F5F5F7] font-semibold mb-1.5">
+              Experience
             </h2>
             {PORTFOLIO_DATA.experience.map((exp, i) => (
-              <div key={i} className="text-xs sm:text-sm">
-                <div className="flex justify-between font-semibold text-white">
+              <div key={i}>
+                <div className="flex justify-between font-medium text-[#F5F5F7]">
                   <span>{exp.position}</span>
-                  <span className="font-mono text-slate-400 text-xs">{exp.duration}</span>
+                  <span className="font-mono text-xs text-[#A4A4B0]">{exp.duration}</span>
                 </div>
-                <div className="text-cyan-400 text-xs font-medium">{exp.organization}</div>
-                <p className="text-xs text-slate-300 mt-1">{exp.description}</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 mt-2">
+                <div className="text-xs text-[#56BFFF]">{exp.organization} &bull; {exp.role}</div>
+                <p className="mt-1 leading-relaxed">{exp.description}</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 mt-2">
                   {exp.highlights.map((h, hIdx) => (
-                    <div key={hIdx} className="flex items-center gap-1.5 text-xs text-slate-300">
-                      <CheckCircle2 size={12} className="text-purple-400 shrink-0" />
+                    <div key={hIdx} className="flex items-center gap-1.5">
+                      <CheckCircle2 size={11} className="text-[#9B6DFF] shrink-0" />
                       <span>{h}</span>
                     </div>
                   ))}
@@ -197,37 +173,17 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
             ))}
           </div>
 
-          {/* Selected Projects */}
+          {/* Selected Credentials */}
           <div>
-            <h2 className="font-display text-sm font-bold text-white tracking-widest uppercase mb-2 text-purple-300 flex items-center gap-1.5">
-              <FolderGit2 size={15} />
-              <span>Key Projects</span>
+            <h2 className="font-mono text-xs uppercase tracking-widest text-[#F5F5F7] font-semibold mb-1.5">
+              Certifications &amp; Honours
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {PORTFOLIO_DATA.projects.map((p) => (
-                <div key={p.id} className="p-3 rounded-xl bg-white/[0.02] border border-white/5">
-                  <div className="font-bold text-xs text-white flex items-center justify-between">
-                    <span>{p.title}</span>
-                    <span className="font-mono text-[10px] text-cyan-400">{p.role}</span>
-                  </div>
-                  <p className="text-[11px] text-slate-400 line-clamp-2 mt-1">{p.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Major Certifications */}
-          <div>
-            <h2 className="font-display text-sm font-bold text-white tracking-widest uppercase mb-2 text-purple-300 flex items-center gap-1.5">
-              <Award size={15} />
-              <span>Honours &amp; Certifications</span>
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-xs">
               {PORTFOLIO_DATA.certifications.slice(0, 6).map((c) => (
-                <div key={c.id} className="flex items-center gap-1.5 text-slate-300">
-                  <CheckCircle2 size={12} className="text-purple-400 shrink-0" />
+                <div key={c.id} className="flex items-center gap-1.5">
+                  <span className="w-1 h-1 rounded-full bg-[#9B6DFF]" />
                   <span>
-                    <strong className="text-white">{c.title}</strong> — {c.issuer}
+                    <strong className="text-[#F5F5F7]">{c.title}</strong> &ndash; {c.issuer}
                     {c.score ? ` (${c.score})` : ''}
                   </span>
                 </div>
@@ -235,19 +191,6 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
             </div>
           </div>
 
-        </div>
-
-        {/* Modal Footer */}
-        <div className="pt-4 mt-6 border-t border-white/10 flex justify-end">
-          <button
-            onClick={() => {
-              soundEffects.playSelect();
-              onClose();
-            }}
-            className="px-5 py-2 rounded-full text-xs font-mono text-slate-300 hover:text-white bg-white/5 border border-white/10"
-          >
-            Close Document &times;
-          </button>
         </div>
 
       </div>

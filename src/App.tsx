@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Preloader } from './ui/Preloader';
 import { CustomCursor } from './ui/CustomCursor';
 import { BackgroundCanvas } from './3d/BackgroundCanvas';
@@ -14,46 +14,28 @@ import { Education } from './sections/Education';
 import { ResumeSection } from './sections/ResumeSection';
 import { Contact } from './sections/Contact';
 import { ResumeModal } from './modals/ResumeModal';
-import { soundEffects } from './ui/SoundEffects';
 
 export function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isResumeOpen, setIsResumeOpen] = useState(false);
 
-  useEffect(() => {
-    // Attempt subtle ambient soundscape initialization on first user interaction
-    const handleFirstInteraction = () => {
-      soundEffects.startAmbient();
-      window.removeEventListener('click', handleFirstInteraction);
-      window.removeEventListener('keydown', handleFirstInteraction);
-    };
-
-    window.addEventListener('click', handleFirstInteraction);
-    window.addEventListener('keydown', handleFirstInteraction);
-
-    return () => {
-      window.removeEventListener('click', handleFirstInteraction);
-      window.removeEventListener('keydown', handleFirstInteraction);
-    };
-  }, []);
-
   return (
-    <div className="relative min-h-screen bg-[#030306] text-slate-100 selection:bg-purple-600/30 selection:text-purple-200">
-      {/* Cinematic Intro Preloader */}
+    <div className="relative min-h-screen bg-[#08090D] text-[#F5F5F7] selection:bg-[#9B6DFF]/20 selection:text-[#F5F5F7]">
+      {/* Minimal Intro Preloader */}
       {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
 
-      {/* Desktop Custom Cursor */}
+      {/* Sleek Minimal Desktop Cursor */}
       <CustomCursor />
 
-      {/* Ambient Canvas Background */}
+      {/* Subtle Cinematic Ambient Backdrop */}
       <BackgroundCanvas />
 
-      {/* Top Floating Navigation */}
+      {/* Floating Navigation */}
       <Navbar onOpenResume={() => setIsResumeOpen(true)} />
 
-      {/* Main Page Content */}
+      {/* Main Content */}
       <main className="relative z-10">
-        <Hero onOpenResume={() => setIsResumeOpen(true)} />
+        <Hero />
         <About />
         <Skills />
         <Projects />
@@ -64,7 +46,7 @@ export function App() {
         <Contact />
       </main>
 
-      {/* Footer */}
+      {/* Minimal Footer */}
       <Footer />
 
       {/* Executive Resume Modal */}

@@ -8,51 +8,39 @@ export default {
   theme: {
     extend: {
       colors: {
-        space: {
-          950: '#030306',
-          900: '#07070d',
-          850: '#0b0b14',
-          800: '#10101c',
-          750: '#161626',
-          700: '#1d1d33',
+        dark: {
+          950: '#08090D', // Exact requested background
+          900: '#0D0E15',
+          850: '#12141D',
+          800: '#171A26',
+          700: '#222638',
         },
-        electric: {
-          violet: '#8b5cf6',
-          purple: '#a855f7',
-          indigo: '#6366f1',
-          cyan: '#06b6d4',
-          blue: '#3b82f6',
-          pink: '#ec4899',
+        luxury: {
+          violet: '#9B6DFF', // Soft violet requested
+          blue: '#56BFFF',   // Electric blue requested
+          white: '#F5F5F7',  // Clean text requested
+          grey: '#A4A4B0',   // Secondary soft grey requested
+          muted: '#6E6E7C',
         }
       },
       fontFamily: {
-        sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
-        display: ['Syne', '"Space Grotesk"', 'sans-serif'],
+        sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+        display: ['Syne', '"Plus Jakarta Sans"', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'monospace'],
       },
       animation: {
-        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'float-slow': 'float 6s ease-in-out infinite',
-        'float-reverse': 'floatReverse 7s ease-in-out infinite',
-        'glow-pulse': 'glowPulse 3s ease-in-out infinite alternate',
+        'fade-in': 'fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+        'subtle-float': 'subtleFloat 7s ease-in-out infinite',
       },
       keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-14px)' },
+        fadeIn: {
+          '0%': { opacity: '0', transform: 'translateY(12px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
         },
-        floatReverse: {
+        subtleFloat: {
           '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(14px)' },
-        },
-        glowPulse: {
-          '0%': { opacity: '0.4', filter: 'blur(30px)' },
-          '100%': { opacity: '0.8', filter: 'blur(50px)' },
+          '50%': { transform: 'translateY(-6px)' },
         }
-      },
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'hero-glow': 'radial-gradient(circle at 50% 30%, rgba(139, 92, 246, 0.15), rgba(99, 102, 241, 0.08) 35%, transparent 70%)',
       }
     },
   },
