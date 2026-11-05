@@ -9,15 +9,15 @@ export const Certifications: React.FC = () => {
   const certs = PORTFOLIO_DATA.certifications;
 
   return (
-    <section id="certifications" className="relative py-32 border-t border-purple-900/15">
+    <section id="certifications" className="relative py-32 border-t border-purple-900/20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
+        {/* Section Header with Neon Accent */}
         <div className="mb-14">
-          <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#BF5AFF] block mb-2">
+          <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#BF5AFF] block mb-2 neon-text-purple font-semibold">
             04 &bull; CERTIFICATIONS &amp; CREDENTIALS
           </span>
-          <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-[#FFFFFF]">
+          <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-[#FFFFFF] drop-shadow-[0_0_20px_rgba(191,90,255,0.25)]">
             Verified Credentials &amp; Honours
           </h2>
           <p className="mt-3 text-sm sm:text-base text-[#B8AEC7] font-light max-w-2xl leading-relaxed">
@@ -25,8 +25,8 @@ export const Certifications: React.FC = () => {
           </p>
         </div>
 
-        {/* Clean Glassmorphic Certificates Gallery */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {/* Clean Glassmorphic Animated Neon Certificates Gallery */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {certs.map((cert) => (
             <div
               key={cert.id}
@@ -35,21 +35,21 @@ export const Certifications: React.FC = () => {
                 setSelectedCert(cert);
               }}
               onMouseEnter={() => soundEffects.playHover()}
-              className="p-6 rounded-2xl bg-[#100B1B]/60 border border-[#BF5AFF]/15 hover:border-[#BF5AFF]/50 hover:shadow-[0_8px_30px_rgba(191,90,255,0.22)] backdrop-blur-xl transition-all duration-300 cursor-pointer flex flex-col justify-between group"
+              className="neon-card neon-sheen-sweep p-6 cursor-pointer flex flex-col justify-between group"
             >
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <span className="font-mono text-[10px] text-[#D8B4FE]/70 uppercase tracking-widest">
+                  <span className="font-mono text-[10px] text-[#D8B4FE]/80 uppercase tracking-widest">
                     0{cert.number} &bull; {cert.category}
                   </span>
                   {cert.isTopAchievement && (
-                    <span className="text-[10px] font-mono text-[#BF5AFF] bg-[#BF5AFF]/15 px-2 py-0.5 rounded border border-[#BF5AFF]/30 shadow-[0_0_8px_rgba(191,90,255,0.2)]">
+                    <span className="text-[10px] font-mono text-[#BF5AFF] bg-[#BF5AFF]/20 px-2.5 py-0.5 rounded-full border border-[#BF5AFF]/45 shadow-[0_0_12px_rgba(191,90,255,0.35)]">
                       Distinction
                     </span>
                   )}
                 </div>
 
-                <h3 className="font-display text-base font-semibold text-[#FFFFFF] group-hover:text-[#D8B4FE] transition-colors mb-1">
+                <h3 className="font-display text-base font-semibold text-[#FFFFFF] group-hover:text-[#D8B4FE] group-hover:neon-text-lavender transition-all mb-1">
                   {cert.title}
                 </h3>
                 <p className="text-xs text-[#B8AEC7] font-light">
@@ -57,35 +57,35 @@ export const Certifications: React.FC = () => {
                 </p>
 
                 {cert.dateOrDuration && (
-                  <p className="text-[11px] font-mono text-[#B8AEC7]/70 mt-1">
+                  <p className="text-[11px] font-mono text-[#B8AEC7]/80 mt-1">
                     {cert.dateOrDuration}
                   </p>
                 )}
                 {cert.professor && (
-                  <p className="text-[11px] font-mono text-[#8B9CFF] mt-0.5">
+                  <p className="text-[11px] font-mono text-[#8B9CFF] mt-0.5 drop-shadow-[0_0_8px_rgba(139,156,255,0.3)]">
                     {cert.professor}
                   </p>
                 )}
               </div>
 
-              <div className="pt-5 mt-5 border-t border-purple-900/20 flex items-center justify-between text-xs">
+              <div className="pt-5 mt-5 border-t border-purple-900/30 flex items-center justify-between text-xs">
                 {cert.score ? (
-                  <span className="font-mono text-[#8B9CFF] font-medium text-[11px]">
+                  <span className="font-mono text-[#8B9CFF] font-medium text-[11px] drop-shadow-[0_0_6px_rgba(139,156,255,0.4)]">
                     {cert.score}
                   </span>
                 ) : cert.badge ? (
-                  <span className="font-mono text-[#BF5AFF] font-medium text-[11px]">
+                  <span className="font-mono text-[#BF5AFF] font-medium text-[11px] drop-shadow-[0_0_6px_rgba(191,90,255,0.5)]">
                     {cert.badge}
                   </span>
                 ) : (
-                  <span className="text-[#B8AEC7]/60 font-mono text-[11px]">
+                  <span className="text-[#B8AEC7]/70 font-mono text-[11px]">
                     Certified
                   </span>
                 )}
 
-                <span className="text-[#B8AEC7] group-hover:text-[#FFFFFF] font-mono text-xs flex items-center gap-1 transition-colors">
+                <span className="text-[#B8AEC7] group-hover:text-[#FFFFFF] group-hover:neon-text-purple font-mono text-xs flex items-center gap-1 transition-all">
                   <span>View</span>
-                  <ArrowUpRight size={12} className="text-[#BF5AFF]" />
+                  <ArrowUpRight size={13} className="text-[#BF5AFF]" />
                 </span>
               </div>
             </div>
