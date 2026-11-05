@@ -8,15 +8,15 @@ export const About: React.FC = () => {
   const { location, email } = PORTFOLIO_DATA.personal;
 
   return (
-    <section id="about" className="relative py-32 border-t border-purple-900/20">
+    <section id="about" className="relative py-32 border-t border-purple-900/15">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Label */}
         <div className="mb-12">
-          <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#BF5AFF] block mb-2 neon-text-purple font-semibold">
+          <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#BF5AFF] block mb-2">
             01 &bull; ABOUT
           </span>
-          <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-[#FFFFFF] drop-shadow-[0_0_20px_rgba(191,90,255,0.25)]">
+          <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-[#FFFFFF]">
             {heading}
           </h2>
         </div>
@@ -35,11 +35,11 @@ export const About: React.FC = () => {
               </p>
             ))}
 
-            {/* Metrics Row with Soft Glow */}
-            <div className="pt-8 grid grid-cols-2 sm:grid-cols-4 gap-6 border-t border-purple-900/25">
+            {/* Metrics Row */}
+            <div className="pt-8 grid grid-cols-2 sm:grid-cols-4 gap-6 border-t border-purple-900/20">
               {metrics.map((m, idx) => (
-                <div key={idx} className="group">
-                  <div className="font-display text-2xl font-bold text-[#FFFFFF] group-hover:neon-text-purple transition-all">
+                <div key={idx}>
+                  <div className="font-display text-2xl font-bold text-[#FFFFFF]">
                     {m.value}
                   </div>
                   <div className="text-xs text-[#B8AEC7] mt-0.5">{m.label}</div>
@@ -48,59 +48,58 @@ export const About: React.FC = () => {
             </div>
           </div>
 
-          {/* Animated Neon Profile Card */}
+          {/* Refined Glassmorphism Profile Card */}
           <div className="lg:col-span-5">
             <div
               onMouseEnter={() => soundEffects.playHover()}
-              className="neon-frame"
+              className="p-7 rounded-2xl neon-animated-card space-y-6"
             >
-              <div className="neon-frame-inner p-7 space-y-6 neon-sheen-sweep">
-                <div className="flex items-center justify-between pb-5 border-b border-purple-900/25">
-                  <span className="font-mono text-xs text-[#B8AEC7] uppercase tracking-wider">
-                    Profile Overview
-                  </span>
-                  <span className="font-mono text-[11px] text-[#D8B4FE] bg-[#BF5AFF]/20 px-3 py-1 rounded-full border border-[#BF5AFF]/40 shadow-[0_0_10px_rgba(191,90,255,0.3)]">
-                    Open for Opportunities
-                  </span>
-                </div>
+              <div className="flex items-center justify-between pb-5 border-b border-purple-900/20">
+                <span className="font-mono text-xs text-[#B8AEC7] uppercase tracking-wider">
+                  Profile Overview
+                </span>
+                <span className="font-mono text-[11px] text-[#D8B4FE] bg-[#BF5AFF]/15 px-2.5 py-0.5 rounded-full border border-[#BF5AFF]/30">
+                  Open for Opportunities
+                </span>
+              </div>
 
-                <div>
-                  <h3 className="font-display text-xl font-bold text-[#FFFFFF] drop-shadow-[0_0_12px_rgba(191,90,255,0.25)]">
-                    Rakshana R.
-                  </h3>
-                  <p className="text-xs font-mono text-[#BF5AFF] mt-1 drop-shadow-[0_0_6px_rgba(191,90,255,0.4)]">
-                    UI/UX Designer &bull; Frontend Developer
-                  </p>
-                  <p className="text-xs text-[#B8AEC7] mt-0.5">
-                    {location}
-                  </p>
-                </div>
+              <div>
+                <h3 className="font-display text-xl font-bold text-[#FFFFFF]">
+                  Rakshana R.
+                </h3>
+                <p className="text-xs font-mono text-[#BF5AFF] mt-1">
+                  UI/UX Designer &bull; Frontend Developer
+                </p>
+                <p className="text-xs text-[#B8AEC7] mt-0.5">
+                  {location}
+                </p>
+              </div>
 
-                <div className="space-y-2.5 text-xs text-[#B8AEC7] pt-2">
-                  <div className="flex justify-between py-1.5 border-b border-purple-900/20">
-                    <span>Degree</span>
-                    <span className="text-[#FFFFFF] font-medium">B.Tech Information Technology</span>
-                  </div>
-                  <div className="flex justify-between py-1.5 border-b border-purple-900/20">
-                    <span>Institution</span>
-                    <span className="text-[#FFFFFF] font-medium">Bannari Amman Institute of Tech</span>
-                  </div>
-                  <div className="flex justify-between py-1.5 border-b border-purple-900/20">
-                    <span>Timeline</span>
-                    <span className="text-[#FFFFFF] font-medium">2025 &ndash; 2029</span>
-                  </div>
-                  <div className="flex justify-between py-1.5">
-                    <span>Contact</span>
-                    <a
-                      href={`mailto:${email}`}
-                      className="text-[#D8B4FE] hover:text-[#BF5AFF] hover:underline flex items-center gap-1 transition-colors drop-shadow-[0_0_6px_rgba(191,90,255,0.3)]"
-                    >
-                      <span>Send Email</span>
-                      <ArrowUpRight size={12} />
-                    </a>
-                  </div>
+              <div className="space-y-2.5 text-xs text-[#B8AEC7] pt-2">
+                <div className="flex justify-between py-1.5 border-b border-purple-900/15">
+                  <span>Degree</span>
+                  <span className="text-[#FFFFFF] font-medium">B.Tech Information Technology</span>
+                </div>
+                <div className="flex justify-between py-1.5 border-b border-purple-900/15">
+                  <span>Institution</span>
+                  <span className="text-[#FFFFFF] font-medium">Bannari Amman Institute of Tech</span>
+                </div>
+                <div className="flex justify-between py-1.5 border-b border-purple-900/15">
+                  <span>Timeline</span>
+                  <span className="text-[#FFFFFF] font-medium">2025 &ndash; 2029</span>
+                </div>
+                <div className="flex justify-between py-1.5">
+                  <span>Contact</span>
+                  <a
+                    href={`mailto:${email}`}
+                    className="text-[#D8B4FE] hover:text-[#BF5AFF] hover:underline flex items-center gap-1 transition-colors"
+                  >
+                    <span>Send Email</span>
+                    <ArrowUpRight size={12} />
+                  </a>
                 </div>
               </div>
+
             </div>
           </div>
 

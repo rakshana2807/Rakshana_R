@@ -26,9 +26,9 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({ cert, onClos
   if (!cert) return null;
 
   return (
-    <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-xl animate-fade-in">
+    <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md animate-fade-in">
       <div
-        className="relative w-full max-w-xl rounded-3xl bg-[#100B1B] border border-[#BF5AFF]/30 shadow-[0_0_50px_rgba(191,90,255,0.25)] p-6 sm:p-8 text-left"
+        className="relative w-full max-w-xl rounded-2xl bg-[#100B1B]/95 border border-[#BF5AFF]/30 shadow-[0_0_50px_rgba(191,90,255,0.25)] p-6 sm:p-8 text-left backdrop-blur-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
@@ -37,25 +37,25 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({ cert, onClos
             soundEffects.playSelect();
             onClose();
           }}
-          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/5 hover:bg-[#BF5AFF]/20 text-[#B8AEC7] hover:text-[#FFFFFF] flex items-center justify-center transition-colors"
+          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 text-[#A4A4B0] hover:text-white flex items-center justify-center transition-colors"
           aria-label="Close"
         >
           <X size={16} />
         </button>
 
-        <span className="font-mono text-xs text-[#BF5AFF] uppercase tracking-wider block mb-2 neon-text-purple font-semibold">
+        <span className="font-mono text-xs text-[#9B6DFF] uppercase tracking-wider block mb-2">
           Verified Credential &bull; 0{cert.number}
         </span>
 
-        <h3 className="font-display text-2xl font-bold text-[#FFFFFF] drop-shadow-[0_0_15px_rgba(191,90,255,0.3)] mb-1">
+        <h3 className="font-display text-2xl font-bold text-[#F5F5F7] mb-1">
           {cert.title}
         </h3>
-        <p className="text-sm text-[#B8AEC7] font-light">
+        <p className="text-sm text-[#A4A4B0] font-light">
           {cert.issuer}
         </p>
 
         {(cert.dateOrDuration || cert.professor) && (
-          <div className="text-xs font-mono text-[#D8B4FE] mt-1 space-x-2">
+          <div className="text-xs font-mono text-[#56BFFF] mt-1 space-x-2">
             {cert.dateOrDuration && <span>{cert.dateOrDuration}</span>}
             {cert.professor && <span>&bull; {cert.professor}</span>}
           </div>
@@ -67,9 +67,9 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({ cert, onClos
             {cert.achievements.map((item, idx) => (
               <div
                 key={idx}
-                className="p-3 rounded-xl bg-[#160F25] border border-[#BF5AFF]/15 hover:border-[#BF5AFF]/35 flex items-center gap-2.5 text-xs text-[#E0DEEC] transition-colors"
+                className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.04] flex items-center gap-2.5 text-xs text-[#E0DEEC]"
               >
-                <CheckCircle2 size={14} className="text-[#BF5AFF] shrink-0 drop-shadow-[0_0_4px_#BF5AFF]" />
+                <CheckCircle2 size={14} className="text-[#9B6DFF] shrink-0" />
                 <span>{item}</span>
               </div>
             ))}
@@ -78,25 +78,25 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({ cert, onClos
 
         {/* Scores if available */}
         {(cert.score || cert.assignmentScore || cert.badge) && (
-          <div className="grid grid-cols-2 gap-3 pt-4 border-t border-purple-900/30 mb-6">
+          <div className="grid grid-cols-2 gap-3 pt-4 border-t border-white/[0.06] mb-6">
             {cert.score && (
-              <div className="p-3 rounded-xl bg-[#160F25] border border-[#BF5AFF]/20 shadow-[0_0_10px_rgba(191,90,255,0.15)]">
-                <span className="text-[10px] font-mono text-[#D8B4FE] uppercase block">Score</span>
-                <span className="text-xs font-semibold text-[#FFFFFF]">{cert.score}</span>
+              <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.04]">
+                <span className="text-[10px] font-mono text-[#A4A4B0] uppercase block">Score</span>
+                <span className="text-xs font-semibold text-[#F5F5F7]">{cert.score}</span>
               </div>
             )}
             {cert.assignmentScore && (
-              <div className="p-3 rounded-xl bg-[#160F25] border border-[#BF5AFF]/20 shadow-[0_0_10px_rgba(191,90,255,0.15)]">
-                <span className="text-[10px] font-mono text-[#D8B4FE] uppercase block">Assignment</span>
-                <span className="text-xs font-semibold text-[#FFFFFF]">{cert.assignmentScore}</span>
+              <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.04]">
+                <span className="text-[10px] font-mono text-[#A4A4B0] uppercase block">Assignment</span>
+                <span className="text-xs font-semibold text-[#F5F5F7]">{cert.assignmentScore}</span>
               </div>
             )}
           </div>
         )}
 
-        <div className="pt-4 border-t border-purple-900/30 flex items-center justify-between">
-          <div className="flex items-center gap-1.5 text-xs font-mono text-emerald-400">
-            <ShieldCheck size={14} className="drop-shadow-[0_0_6px_rgba(52,211,153,0.5)]" />
+        <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between">
+          <div className="flex items-center gap-1.5 text-xs font-mono text-emerald-400/90">
+            <ShieldCheck size={14} />
             <span>Authenticated Credential</span>
           </div>
 
@@ -105,7 +105,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({ cert, onClos
               soundEffects.playSelect();
               onClose();
             }}
-            className="text-xs font-mono text-[#B8AEC7] hover:text-white"
+            className="text-xs font-mono text-[#A4A4B0] hover:text-white"
           >
             Close
           </button>

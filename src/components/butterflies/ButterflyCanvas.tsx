@@ -89,6 +89,33 @@ export const ButterflyCanvas: React.FC = () => {
       });
     }
 
+    // Additional small ethereal butterflies fluttering naturally across depths
+    const smallButterflyCount = 14;
+    for (let j = 0; j < smallButterflyCount; j++) {
+      const depth = 0.22 + Math.random() * 0.3; // smaller depth
+      const size = 10 + Math.random() * 8;      // 10px to 18px wingspan
+      const angle = Math.random() * Math.PI * 2;
+      const speed = 0.6 + Math.random() * 0.6;
+
+      butterflies.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        size,
+        flapPhase: Math.random() * Math.PI * 2,
+        flapSpeed: 0.22 + Math.random() * 0.08,
+        glideTimer: Math.random() * 60,
+        isGliding: false,
+        angle,
+        targetAngle: angle,
+        turnSpeed: 0.025 + Math.random() * 0.02,
+        depth,
+        colorHue: j % 3 === 0 ? '#BF5AFF' : j % 3 === 1 ? '#D8B4FE' : '#A855F7',
+        glowColor: j % 2 === 0 ? '#D8B4FE' : '#8B9CFF',
+      });
+    }
+
     // Helper: Draw realistic Morpho butterfly wing
     const drawButterfly = (b: Butterfly) => {
       ctx.save();
