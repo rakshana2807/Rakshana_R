@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Preloader } from './ui/Preloader';
 import { CustomCursor } from './ui/CustomCursor';
 import { BackgroundCanvas } from './3d/BackgroundCanvas';
-import { ButterflyCanvas } from './components/butterflies/ButterflyCanvas';
+import { FullWebsiteButterflyScene } from './3d/FullWebsiteButterflyScene';
 import { Navbar } from './layout/Navbar';
 import { Footer } from './layout/Footer';
 import { Hero } from './sections/Hero';
@@ -28,11 +28,11 @@ export function App() {
       {/* Sleek Minimal Desktop Cursor */}
       <CustomCursor />
 
-      {/* Deep Midnight Purple Base Lighting */}
+      {/* Deep Midnight Purple Base Backdrop */}
       <BackgroundCanvas />
 
-      {/* Flying Purple Butterflies Engine (Smooth, Realistic Flight, Luminous Dust Trails) */}
-      <ButterflyCanvas />
+      {/* Full-Website 3D Butterfly Environment (Continuous 3D space across all sections) */}
+      <FullWebsiteButterflyScene />
 
       {/* Floating Dark Glass Navigation */}
       <Navbar onOpenResume={() => setIsResumeOpen(true)} />
