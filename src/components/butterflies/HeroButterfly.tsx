@@ -1,131 +1,204 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+
+interface Particle {
+  id: number;
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  size: number;
+  alpha: number;
+  color: string;
+}
 
 export const HeroButterfly: React.FC = () => {
-  const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
+  const [flightPos, setFlightPos] = useState({ x: 0, y: 0, rotZ: 0, rotX: 0 });
+  const [flapAngle, setFlapAngle] = useState(0);
+  const [particles, setParticles] = useState<Particle[]>([]);
+  const mouseRef = useRef({ x: 0, y: 0, targetX: 0, targetY: 0 });
+  const timeRef = useRef(0);
+  const particleIdRef = useRef(0);
 
   useEffect(() => {
+    // Gentle mouse parallax
     const handleMouseMove = (e: MouseEvent) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 20;
-      const y = (e.clientY / window.innerHeight - 0.5) * 15;
-      setMouseOffset({ x, y });
+      const x = (e.clientX / window.innerWidth - 0.5) * 26;
+      const y = (e.clientY / window.innerHeight - 0.5) * 20;
+      mouseRef.current.targetX = x;
+      mouseRef.current.targetY = y;
     };
+
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+
+    let animId: number;
+
+    const animate = () => {
+      timeRef.current += 0.024;
+      const t = timeRef.current;
+
+      // Smooth mouse damping
+      mouseRef.current.x += (mouseRef.current.targetX - mouseRef.current.x) * 0.05;
+      mouseRef.current.y += (mouseRef.current.targetY - mouseRef.current.y) * 0.05;
+
+      // Smooth curved flight path: continuous floating left/right and up/down
+      const floatX = Math.sin(t * 0.8) * 20 + Math.cos(t * 0.35) * 10 + mouseRef.current.x;
+      const floatY = Math.cos(t * 1.05) * 24 + Math.sin(t * 0.45) * 12 + mouseRef.current.y;
+
+      // Natural banking into turns and subtle pitch
+      const rotZ = Math.sin(t * 0.8) * 6;  // banking
+      const rotX = Math.cos(t * 1.05) * 4.5; // pitch
+
+      setFlightPos({ x: floatX, y: floatY, rotZ, rotX });
+
+      // Natural wingbeat cycle:
+      // Alternates between active flutter cycles and brief gliding
+      const cycle = (t * 0.6) % (Math.PI * 2);
+      const isGliding = cycle > 4.2 && cycle < 5.6;
+
+      let currentFlap: number;
+      if (isGliding) {
+        // Wings held open during gentle glide
+        currentFlap = 10 + Math.sin(t * 1.8) * 4;
+      } else {
+        // Active 3D wing flapping
+        currentFlap = Math.abs(Math.sin(t * 3.6)) * 48;
+      }
+      setFlapAngle(currentFlap);
+
+      // Emit luminous sparks during wingbeats
+      if (!isGliding && currentFlap > 32 && Math.random() < 0.42) {
+        const pColors = ['#D8B4FE', '#BF5AFF', '#F472B6', '#E879F9', '#FFFFFF'];
+        const newParticle: Particle = {
+          id: particleIdRef.current++,
+          x: floatX + (Math.random() - 0.5) * 90,
+          y: floatY + (Math.random() - 0.5) * 50 + 20,
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: Math.random() * 0.5 + 0.3,
+          size: Math.random() * 2.5 + 1.2,
+          alpha: 0.85,
+          color: pColors[Math.floor(Math.random() * pColors.length)],
+        };
+        setParticles((prev) => [...prev.slice(-18), newParticle]);
+      }
+
+      // Fade out particles
+      setParticles((prev) =>
+        prev
+          .map((p) => ({
+            ...p,
+            x: p.x + p.vx,
+            y: p.y + p.vy,
+            alpha: p.alpha - 0.018,
+          }))
+          .filter((p) => p.alpha > 0)
+      );
+
+      animId = requestAnimationFrame(animate);
+    };
+
+    animId = requestAnimationFrame(animate);
+
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
   }, []);
 
   return (
     <div
-      className="absolute top-1/2 right-4 sm:right-12 md:right-20 -translate-y-1/2 pointer-events-none z-0 hidden sm:block"
+      className="absolute top-1/2 right-2 sm:right-6 md:right-10 lg:right-16 xl:right-20 -translate-y-1/2 pointer-events-none z-10 select-none"
       style={{
-        transform: `translate3d(${mouseOffset.x}px, ${mouseOffset.y}px, 0)`,
-        transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+        transform: `translate3d(${flightPos.x}px, ${flightPos.y}px, 0)`,
+        transition: 'transform 0.08s linear',
       }}
     >
-      {/* Soft Ambient Neon Glow Behind Butterfly */}
-      <div className="absolute inset-0 w-64 h-64 -translate-x-1/4 -translate-y-1/4 bg-[#BF5AFF]/15 rounded-full blur-[80px] pointer-events-none animate-soft-glow" />
+      {/* Soft Neon Purple Ambient Back-Glow */}
+      <div className="absolute inset-0 w-80 h-80 -translate-x-1/4 -translate-y-1/4 rounded-full bg-gradient-to-tr from-[#BF5AFF]/25 via-[#D946EF]/20 to-[#8B9CFF]/15 blur-[85px] pointer-events-none animate-soft-glow" />
 
-      {/* Floating Animated Container */}
-      <div className="relative animate-subtle-float">
-        <svg
-          width="180"
-          height="140"
-          viewBox="-90 -70 180 140"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="filter drop-shadow-[0_0_24px_rgba(191,90,255,0.6)]"
+      {/* Luminous Particle Sparks Trailing Behind */}
+      {particles.map((p) => (
+        <div
+          key={p.id}
+          className="absolute rounded-full pointer-events-none"
+          style={{
+            left: `${p.x + 180}px`,
+            top: `${p.y + 120}px`,
+            width: `${p.size}px`,
+            height: `${p.size}px`,
+            backgroundColor: p.color,
+            opacity: p.alpha,
+            boxShadow: `0 0 10px ${p.color}`,
+            transform: 'translate(-50%, -50%)',
+          }}
+        />
+      ))}
+
+      {/* 3D Flying Butterfly Container */}
+      <div
+        className="relative w-[210px] sm:w-[280px] md:w-[350px] lg:w-[410px] xl:w-[460px] aspect-[477/340]"
+        style={{
+          perspective: '1200px',
+          transformStyle: 'preserve-3d',
+          transform: `rotateZ(${flightPos.rotZ}deg) rotateX(${flightPos.rotX}deg)`,
+        }}
+      >
+        {/* Left Wing with 3D Flap (hinged at right edge) */}
+        <div
+          className="absolute top-0 left-0 h-full"
+          style={{
+            width: `${(242 / 477) * 100}%`,
+            transformOrigin: '100% 50%',
+            transform: `rotateY(${flapAngle}deg)`,
+            transformStyle: 'preserve-3d',
+            filter:
+              'drop-shadow(0 0 16px rgba(217, 70, 239, 0.8)) drop-shadow(0 0 32px rgba(191, 90, 255, 0.6)) drop-shadow(0 0 55px rgba(168, 85, 247, 0.4))',
+          }}
         >
-          <defs>
-            {/* Forewing Neon Gradient */}
-            <linearGradient id="heroForeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#1E0D36" />
-              <stop offset="40%" stopColor="#6B21A8" />
-              <stop offset="75%" stopColor="#BF5AFF" />
-              <stop offset="100%" stopColor="#D8B4FE" />
-            </linearGradient>
-
-            {/* Hindwing Gradient */}
-            <linearGradient id="heroHindGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#170A2A" />
-              <stop offset="50%" stopColor="#581C87" />
-              <stop offset="85%" stopColor="#A855F7" />
-              <stop offset="100%" stopColor="#8B9CFF" />
-            </linearGradient>
-
-            {/* Vein Glow Filter */}
-            <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
-              <feGaussianBlur stdDeviation="1.5" result="blur" />
-              <feComposite in="SourceGraphic" in2="blur" operator="over" />
-            </filter>
-          </defs>
-
-          {/* Left Wing Group (Flapping with scaleX) */}
-          <g className="origin-center animate-[flutter_0.36s_ease-in-out_infinite_alternate]">
-            <g transform="scale(-1, 1)">
-              {/* Forewing */}
-              <path
-                d="M 0 -8 C 24 -60, 72 -56, 84 -20 C 84 12, 48 16, 0 4 Z"
-                fill="url(#heroForeGrad)"
-                stroke="#D8B4FE"
-                strokeWidth="1.2"
-              />
-              {/* Forewing Veins */}
-              <path
-                d="M 0 0 Q 36 -28, 72 -24 M 0 0 Q 32 -40, 56 -52 M 0 0 Q 36 -8, 68 4"
-                stroke="#D8B4FE"
-                strokeWidth="0.8"
-                opacity="0.65"
-              />
-              {/* Hindwing */}
-              <path
-                d="M 0 2 C 32 12, 60 32, 48 60 C 36 72, 12 52, 0 22 Z"
-                fill="url(#heroHindGrad)"
-                stroke="#BF5AFF"
-                strokeWidth="1.1"
-              />
-            </g>
-          </g>
-
-          {/* Right Wing Group (Flapping with scaleX) */}
-          <g className="origin-center animate-[flutter_0.36s_ease-in-out_infinite_alternate]">
-            <g>
-              {/* Forewing */}
-              <path
-                d="M 0 -8 C 24 -60, 72 -56, 84 -20 C 84 12, 48 16, 0 4 Z"
-                fill="url(#heroForeGrad)"
-                stroke="#D8B4FE"
-                strokeWidth="1.2"
-              />
-              {/* Forewing Veins */}
-              <path
-                d="M 0 0 Q 36 -28, 72 -24 M 0 0 Q 32 -40, 56 -52 M 0 0 Q 36 -8, 68 4"
-                stroke="#D8B4FE"
-                strokeWidth="0.8"
-                opacity="0.65"
-              />
-              {/* Hindwing */}
-              <path
-                d="M 0 2 C 32 12, 60 32, 48 60 C 36 72, 12 52, 0 22 Z"
-                fill="url(#heroHindGrad)"
-                stroke="#BF5AFF"
-                strokeWidth="1.1"
-              />
-            </g>
-          </g>
-
-          {/* Butterfly Sleek Body */}
-          <ellipse cx="0" cy="5" rx="3.5" ry="24" fill="#140924" stroke="#BF5AFF" strokeWidth="0.8" />
-          <circle cx="0" cy="-22" r="4.5" fill="#1E0D36" stroke="#D8B4FE" strokeWidth="0.7" />
-
-          {/* Antennae */}
-          <path
-            d="M -1 -24 Q -10 -40, -15 -38 M 1 -24 Q 10 -40, 15 -38"
-            stroke="#D8B4FE"
-            strokeWidth="1"
-            fill="none"
+          <img
+            src="/hero-butterfly-left.png"
+            alt="Neon Purple Butterfly Left Wing"
+            className="w-full h-full object-contain pointer-events-none select-none"
+            draggable={false}
           />
-        </svg>
+        </div>
+
+        {/* Right Wing with 3D Flap (hinged at left edge) */}
+        <div
+          className="absolute top-0 right-0 h-full"
+          style={{
+            width: `${(239 / 477) * 100}%`,
+            transformOrigin: '0% 50%',
+            transform: `rotateY(${-flapAngle}deg)`,
+            transformStyle: 'preserve-3d',
+            filter:
+              'drop-shadow(0 0 16px rgba(217, 70, 239, 0.8)) drop-shadow(0 0 32px rgba(191, 90, 255, 0.6)) drop-shadow(0 0 55px rgba(168, 85, 247, 0.4))',
+          }}
+        >
+          <img
+            src="/hero-butterfly-right.png"
+            alt="Neon Purple Butterfly Right Wing"
+            className="w-full h-full object-contain pointer-events-none select-none"
+            draggable={false}
+          />
+        </div>
+
+        {/* Central Luminous Body & Glowing Antennae */}
+        <div
+          className="absolute top-0 left-1/2 -translate-x-1/2 h-full z-20 pointer-events-none"
+          style={{
+            width: `${(60 / 477) * 100}%`,
+            filter:
+              'drop-shadow(0 0 12px rgba(254, 240, 138, 0.9)) drop-shadow(0 0 24px rgba(217, 70, 239, 0.85))',
+          }}
+        >
+          <img
+            src="/hero-butterfly-body.png"
+            alt="Neon Purple Butterfly Body"
+            className="w-full h-full object-contain select-none"
+            draggable={false}
+          />
+        </div>
       </div>
     </div>
   );
 };
-

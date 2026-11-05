@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Preloader } from './ui/Preloader';
 import { CustomCursor } from './ui/CustomCursor';
 import { BackgroundCanvas } from './3d/BackgroundCanvas';
-import { FullWebsiteButterflyScene } from './3d/FullWebsiteButterflyScene';
+import { ButterflyCanvas } from './components/butterflies/ButterflyCanvas';
 import { Navbar } from './layout/Navbar';
 import { Footer } from './layout/Footer';
 import { Hero } from './sections/Hero';
@@ -31,10 +31,10 @@ export function App() {
       {/* Deep Midnight Purple Base Lighting */}
       <BackgroundCanvas />
 
-      {/* Full-Website 3D Butterfly System: Continuous 3D flight across ALL sections */}
-      <FullWebsiteButterflyScene />
+      {/* Flying Purple Butterflies Engine (Smooth, Realistic Flight, Luminous Dust Trails) */}
+      <ButterflyCanvas />
 
-      {/* Floating Dark Glass Navigation with Sound Control */}
+      {/* Floating Dark Glass Navigation */}
       <Navbar onOpenResume={() => setIsResumeOpen(true)} />
 
       {/* Main Content Sections */}
