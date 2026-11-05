@@ -28,13 +28,13 @@ export function App() {
       {/* Sleek Minimal Desktop Cursor */}
       <CustomCursor />
 
-      {/* Deep Midnight Purple Base Backdrop */}
+      {/* Deep Midnight Purple Base Lighting */}
       <BackgroundCanvas />
 
-      {/* Full-Website 3D Butterfly Environment (Continuous 3D space across all sections) */}
+      {/* Full-Website 3D Butterfly System: Continuous 3D flight across ALL sections */}
       <FullWebsiteButterflyScene />
 
-      {/* Floating Dark Glass Navigation */}
+      {/* Floating Dark Glass Navigation with Sound Control */}
       <Navbar onOpenResume={() => setIsResumeOpen(true)} />
 
       {/* Main Content Sections */}

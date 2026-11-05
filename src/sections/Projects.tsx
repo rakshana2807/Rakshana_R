@@ -12,8 +12,8 @@ const ProjectCard: React.FC<{
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 6;
-    const y = ((e.clientY - rect.top) / rect.height - 0.5) * -6;
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 5;
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * -5;
     setTilt({ x, y });
   };
 
@@ -28,7 +28,7 @@ const ProjectCard: React.FC<{
         return (
           <div className="w-full h-full bg-gradient-to-br from-[#3b0d11] via-[#1f0a10] to-[#100B1B] p-5 flex flex-col justify-between relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
             <div className="flex justify-between items-center z-10">
-              <span className="font-mono text-[10px] text-amber-300 bg-amber-500/20 px-2.5 py-0.5 rounded-full border border-amber-500/30">
+              <span className="font-mono text-[10px] text-amber-300 bg-amber-500/20 px-2 py-0.5 rounded border border-amber-500/30">
                 Wi-Fi Portal Experience
               </span>
               <span className="font-mono text-xs text-white/50">01</span>
@@ -37,6 +37,7 @@ const ProjectCard: React.FC<{
               <div className="text-[10px] font-mono text-amber-200/80 uppercase tracking-widest">Hospitality &bull; Web UI</div>
               <div className="font-display text-lg font-bold text-white mt-0.5">RoyalCafe Connect</div>
             </div>
+            {/* Subtle portal graphics */}
             <div className="absolute -right-4 -bottom-4 w-32 h-32 rounded-full bg-amber-500/10 blur-xl pointer-events-none" />
           </div>
         );
@@ -44,7 +45,7 @@ const ProjectCard: React.FC<{
         return (
           <div className="w-full h-full bg-gradient-to-br from-[#0c1f38] via-[#10192e] to-[#100B1B] p-5 flex flex-col justify-between relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
             <div className="flex justify-between items-center z-10">
-              <span className="font-mono text-[10px] text-sky-300 bg-sky-500/20 px-2.5 py-0.5 rounded-full border border-sky-500/30">
+              <span className="font-mono text-[10px] text-sky-300 bg-sky-500/20 px-2 py-0.5 rounded border border-sky-500/30">
                 Desk Reservation Engine
               </span>
               <span className="font-mono text-xs text-white/50">02</span>
@@ -60,7 +61,7 @@ const ProjectCard: React.FC<{
         return (
           <div className="w-full h-full bg-gradient-to-br from-[#3b0f2a] via-[#240b1e] to-[#100B1B] p-5 flex flex-col justify-between relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
             <div className="flex justify-between items-center z-10">
-              <span className="font-mono text-[10px] text-pink-300 bg-pink-500/20 px-2.5 py-0.5 rounded-full border border-pink-500/30">
+              <span className="font-mono text-[10px] text-pink-300 bg-pink-500/20 px-2 py-0.5 rounded border border-pink-500/30">
                 Bubble Tea Customizer
               </span>
               <span className="font-mono text-xs text-white/50">03</span>
@@ -76,7 +77,7 @@ const ProjectCard: React.FC<{
         return (
           <div className="w-full h-full bg-gradient-to-br from-[#27103d] via-[#190a2a] to-[#100B1B] p-5 flex flex-col justify-between relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
             <div className="flex justify-between items-center z-10">
-              <span className="font-mono text-[10px] text-[#D8B4FE] bg-[#BF5AFF]/20 px-2.5 py-0.5 rounded-full border border-[#BF5AFF]/30">
+              <span className="font-mono text-[10px] text-[#D8B4FE] bg-[#BF5AFF]/20 px-2 py-0.5 rounded border border-[#BF5AFF]/30">
                 Digital Twin Mental Health
               </span>
               <span className="font-mono text-xs text-white/50">04</span>
@@ -92,7 +93,7 @@ const ProjectCard: React.FC<{
         return (
           <div className="w-full h-full bg-gradient-to-br from-[#0c2b33] via-[#0b1f24] to-[#100B1B] p-5 flex flex-col justify-between relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
             <div className="flex justify-between items-center z-10">
-              <span className="font-mono text-[10px] text-cyan-300 bg-cyan-500/20 px-2.5 py-0.5 rounded-full border border-cyan-500/30">
+              <span className="font-mono text-[10px] text-cyan-300 bg-cyan-500/20 px-2 py-0.5 rounded border border-cyan-500/30">
                 Object Detection CV
               </span>
               <span className="font-mono text-xs text-white/50">05</span>
@@ -109,7 +110,7 @@ const ProjectCard: React.FC<{
         return (
           <div className="w-full h-full bg-gradient-to-br from-[#0b2b1d] via-[#091f16] to-[#100B1B] p-5 flex flex-col justify-between relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
             <div className="flex justify-between items-center z-10">
-              <span className="font-mono text-[10px] text-emerald-300 bg-emerald-500/20 px-2.5 py-0.5 rounded-full border border-emerald-500/30">
+              <span className="font-mono text-[10px] text-emerald-300 bg-emerald-500/20 px-2 py-0.5 rounded border border-emerald-500/30">
                 Student Productivity UI
               </span>
               <span className="font-mono text-xs text-white/50">06</span>
@@ -133,14 +134,11 @@ const ProjectCard: React.FC<{
         transform: `perspective(1000px) rotateX(${tilt.y}deg) rotateY(${tilt.x}deg)`,
         transition: 'transform 0.25s ease-out',
       }}
-      className="p-6 rounded-2xl bg-[#100B1B]/75 border border-[#BF5AFF]/15 hover:border-[#BF5AFF]/60 hover:shadow-[0_12px_40px_rgba(191,90,255,0.25)] backdrop-blur-xl transition-all duration-300 flex flex-col justify-between group relative overflow-hidden"
+      className="p-6 rounded-2xl bg-[#100B1B]/70 border border-[#BF5AFF]/15 hover:border-[#BF5AFF]/60 hover:shadow-[0_12px_40px_rgba(191,90,255,0.25)] backdrop-blur-xl transition-all duration-300 flex flex-col justify-between group"
     >
-      {/* Animated Subtle Sheen Reflection across Glass */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-
       <div>
         {/* Large Project Preview Image */}
-        <div className="w-full h-48 rounded-xl mb-5 overflow-hidden border border-white/[0.06] relative shadow-inner">
+        <div className="w-full h-48 rounded-xl mb-5 overflow-hidden border border-white/[0.06] relative">
           {getProjectPreview()}
         </div>
 
@@ -168,7 +166,7 @@ const ProjectCard: React.FC<{
       </div>
 
       {/* Action Buttons */}
-      <div className="pt-4 border-t border-purple-900/20 flex items-center justify-between gap-3 relative z-10">
+      <div className="pt-4 border-t border-purple-900/20 flex items-center justify-between gap-3">
         <button
           onClick={() => {
             soundEffects.playSelect();

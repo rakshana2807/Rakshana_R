@@ -1,6 +1,7 @@
 import React from 'react';
 import { PORTFOLIO_DATA } from '../data/portfolioData';
 import { HeroScene } from '../3d/HeroScene';
+import { HeroButterfly } from '../components/butterflies/HeroButterfly';
 import { soundEffects } from '../ui/SoundEffects';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 
@@ -18,6 +19,9 @@ export const Hero: React.FC = () => {
     >
       {/* Soft Purple Ambient Backdrop Lighting */}
       <HeroScene />
+
+      {/* Majestic Purple Neon Butterfly Visual */}
+      <HeroButterfly />
 
       {/* Hero Typography & CTA Container */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">

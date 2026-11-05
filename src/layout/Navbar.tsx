@@ -55,7 +55,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
   const handleToggleSound = () => {
     const muted = soundEffects.toggleMute();
     setIsMuted(muted);
-    if (!muted) soundEffects.playSelect();
   };
 
   return (
@@ -66,7 +65,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
         }`}
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <nav className="flex items-center justify-between px-5 py-2.5 rounded-full bg-[#100B1B]/80 backdrop-blur-xl border border-[#BF5AFF]/20 shadow-[0_4px_30px_rgba(8,6,16,0.8),0_0_15px_rgba(191,90,255,0.12)]">
+          <nav className="flex items-center justify-between px-5 py-2.5 rounded-full bg-[#100B1B]/85 backdrop-blur-xl border border-[#BF5AFF]/25 shadow-[0_4px_30px_rgba(8,6,16,0.8),0_0_15px_rgba(191,90,255,0.12)]">
             
             {/* Logo Monogram */}
             <a
@@ -108,19 +107,33 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
             </div>
 
             {/* Right Controls */}
-            <div className="flex items-center gap-2">
-              {/* Subtle Audio Toggle */}
+            <div className="flex items-center gap-2.5">
+              {/* Interactive Butterfly Sound Toggle with Animated Icon */}
               <button
                 onClick={handleToggleSound}
                 onMouseEnter={() => soundEffects.playHover()}
-                title={isMuted ? 'Unmute subtle sounds' : 'Mute subtle sounds'}
-                className="w-7 h-7 rounded-full flex items-center justify-center text-[#B8AEC7] hover:text-[#BF5AFF] hover:bg-white/5 transition-colors"
-                aria-label="Toggle Sound"
+                title={isMuted ? 'Enable Butterfly Sound Effects (OFF by default)' : 'Mute Sounds'}
+                className={`relative px-2.5 py-1 rounded-full flex items-center gap-1.5 text-xs font-mono transition-all duration-300 border ${
+                  !isMuted
+                    ? 'bg-[#BF5AFF]/20 border-[#BF5AFF]/50 text-[#FFFFFF] shadow-[0_0_15px_rgba(191,90,255,0.4)]'
+                    : 'bg-white/[0.03] border-white/10 text-[#B8AEC7] hover:text-[#FFFFFF] hover:border-[#BF5AFF]/30'
+                }`}
+                aria-label="Toggle Butterfly Sound Effects"
               >
-                {isMuted ? <VolumeX size={14} /> : <Volume2 size={14} className="text-[#BF5AFF]" />}
+                {!isMuted ? (
+                  <>
+                    <Volume2 size={13} className="text-[#BF5AFF] animate-pulse" />
+                    <span className="text-[10px] hidden sm:inline text-[#D8B4FE]">Sound ON</span>
+                  </>
+                ) : (
+                  <>
+                    <VolumeX size={13} className="text-[#B8AEC7]" />
+                    <span className="text-[10px] hidden sm:inline text-[#B8AEC7]/80">Sound OFF</span>
+                  </>
+                )}
               </button>
 
-              {/* Minimal Resume Button with Soft Neon Border */}
+              {/* Minimal Resume Button */}
               <button
                 onClick={() => {
                   soundEffects.playSelect();
@@ -169,16 +182,26 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
                   </button>
                 );
               })}
-              <div className="pt-2 mt-2 border-t border-white/[0.08]">
+              <div className="pt-2 mt-2 border-t border-white/[0.08] flex items-center justify-between">
+                <button
+                  onClick={() => {
+                    handleToggleSound();
+                  }}
+                  className="flex items-center gap-1.5 text-xs text-[#D8B4FE] px-3 py-1.5 rounded-lg bg-white/5 border border-white/10"
+                >
+                  {!isMuted ? <Volume2 size={13} className="text-[#BF5AFF]" /> : <VolumeX size={13} />}
+                  <span>{!isMuted ? 'Sound Enabled' : 'Sound Muted'}</span>
+                </button>
+
                 <button
                   onClick={() => {
                     soundEffects.playSelect();
                     onOpenResume();
                     setMobileMenuOpen(false);
                   }}
-                  className="w-full py-2 rounded-xl text-xs font-medium text-[#FFFFFF] bg-[#160F25] border border-[#BF5AFF]/30 hover:border-[#BF5AFF] flex items-center justify-center gap-1.5"
+                  className="py-1.5 px-3 rounded-lg text-xs font-medium text-[#FFFFFF] bg-[#160F25] border border-[#BF5AFF]/30 flex items-center gap-1"
                 >
-                  <span>Resume Preview</span>
+                  <span>Resume</span>
                   <ArrowUpRight size={13} className="text-[#D8B4FE]" />
                 </button>
               </div>
