@@ -44,7 +44,6 @@ export const CustomCursor: React.FC = () => {
     };
   }, [isVisible]);
 
-  // Smooth gentle lerp for trailing aura
   useEffect(() => {
     if (isTouchDevice) return;
 
@@ -67,7 +66,7 @@ export const CustomCursor: React.FC = () => {
     <>
       {/* Sleek minimal center dot */}
       <div
-        className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full bg-[#F5F5F7] transition-transform duration-75 ease-out"
+        className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full bg-[#D8B4FE] transition-transform duration-75 ease-out shadow-[0_0_8px_#BF5AFF]"
         style={{
           width: '5px',
           height: '5px',
@@ -76,16 +75,17 @@ export const CustomCursor: React.FC = () => {
           })`,
         }}
       />
-      {/* Subtle trailing ring */}
+      {/* Subtle trailing ring with soft neon violet glow */}
       <div
-        className="fixed top-0 left-0 pointer-events-none z-[9998] rounded-full border border-white/20 transition-all duration-300 ease-out"
+        className="fixed top-0 left-0 pointer-events-none z-[9998] rounded-full border transition-all duration-300 ease-out"
         style={{
-          width: isHovered ? '42px' : '26px',
-          height: isHovered ? '42px' : '26px',
-          transform: `translate3d(${trailingPos.x - (isHovered ? 21 : 13)}px, ${
-            trailingPos.y - (isHovered ? 21 : 13)
+          width: isHovered ? '40px' : '24px',
+          height: isHovered ? '40px' : '24px',
+          transform: `translate3d(${trailingPos.x - (isHovered ? 20 : 12)}px, ${
+            trailingPos.y - (isHovered ? 20 : 12)
           }px, 0)`,
-          borderColor: isHovered ? 'rgba(155, 109, 255, 0.4)' : 'rgba(255, 255, 255, 0.15)',
+          borderColor: isHovered ? 'rgba(191, 90, 255, 0.65)' : 'rgba(216, 180, 254, 0.25)',
+          boxShadow: isHovered ? '0 0 16px rgba(191, 90, 255, 0.4)' : 'none',
         }}
       />
     </>

@@ -51,18 +51,18 @@ export const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="relative py-32 border-t border-white/[0.04]">
+    <section id="contact" className="relative py-32 border-t border-purple-900/15">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="mb-14">
-          <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#9B6DFF] block mb-2">
+          <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#BF5AFF] block mb-2">
             08 &bull; CONTACT
           </span>
-          <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-[#F5F5F7]">
+          <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-[#FFFFFF]">
             {heading}
           </h2>
-          <p className="mt-3 text-sm sm:text-base text-[#A4A4B0] font-light max-w-2xl leading-relaxed">
+          <p className="mt-3 text-sm sm:text-base text-[#B8AEC7] font-light max-w-2xl leading-relaxed">
             Have an opportunity, creative collaboration, or project in mind? Reach out directly or send a message below.
           </p>
         </div>
@@ -75,21 +75,21 @@ export const Contact: React.FC = () => {
             <div className="space-y-4">
               
               {/* Email */}
-              <div className="p-4 rounded-xl bg-[#0D0E15]/50 border border-white/[0.06] flex items-center justify-between">
+              <div className="p-4 rounded-xl bg-[#100B1B]/70 border border-[#BF5AFF]/20 flex items-center justify-between">
                 <div>
-                  <span className="text-[10px] font-mono text-[#A4A4B0]/60 uppercase tracking-wider block">
+                  <span className="text-[10px] font-mono text-[#D8B4FE]/70 uppercase tracking-wider block">
                     Email
                   </span>
                   <a
                     href={`mailto:${email}`}
-                    className="text-xs sm:text-sm font-medium text-[#F5F5F7] hover:text-[#9B6DFF] transition-colors"
+                    className="text-xs sm:text-sm font-medium text-[#FFFFFF] hover:text-[#BF5AFF] transition-colors"
                   >
                     {email}
                   </a>
                 </div>
                 <button
                   onClick={() => copyToClipboard(email, 'email')}
-                  className="p-1.5 text-[#A4A4B0] hover:text-white"
+                  className="p-1.5 text-[#B8AEC7] hover:text-[#BF5AFF]"
                   title="Copy"
                 >
                   {copiedField === 'email' ? <Check size={14} className="text-emerald-400" /> : <Copy size={14} />}
@@ -97,21 +97,21 @@ export const Contact: React.FC = () => {
               </div>
 
               {/* Telephone */}
-              <div className="p-4 rounded-xl bg-[#0D0E15]/50 border border-white/[0.06] flex items-center justify-between">
+              <div className="p-4 rounded-xl bg-[#100B1B]/70 border border-[#BF5AFF]/20 flex items-center justify-between">
                 <div>
-                  <span className="text-[10px] font-mono text-[#A4A4B0]/60 uppercase tracking-wider block">
+                  <span className="text-[10px] font-mono text-[#D8B4FE]/70 uppercase tracking-wider block">
                     Telephone
                   </span>
                   <a
                     href={`tel:${phone}`}
-                    className="text-xs sm:text-sm font-medium text-[#F5F5F7] hover:text-[#56BFFF] transition-colors"
+                    className="text-xs sm:text-sm font-medium text-[#FFFFFF] hover:text-[#8B9CFF] transition-colors"
                   >
                     {phone}
                   </a>
                 </div>
                 <button
                   onClick={() => copyToClipboard(phone, 'phone')}
-                  className="p-1.5 text-[#A4A4B0] hover:text-white"
+                  className="p-1.5 text-[#B8AEC7] hover:text-[#8B9CFF]"
                   title="Copy"
                 >
                   {copiedField === 'phone' ? <Check size={14} className="text-emerald-400" /> : <Copy size={14} />}
@@ -119,11 +119,11 @@ export const Contact: React.FC = () => {
               </div>
 
               {/* Location */}
-              <div className="p-4 rounded-xl bg-[#0D0E15]/50 border border-white/[0.06]">
-                <span className="text-[10px] font-mono text-[#A4A4B0]/60 uppercase tracking-wider block">
+              <div className="p-4 rounded-xl bg-[#100B1B]/70 border border-[#BF5AFF]/20">
+                <span className="text-[10px] font-mono text-[#D8B4FE]/70 uppercase tracking-wider block">
                   Location
                 </span>
-                <span className="text-xs sm:text-sm font-medium text-[#F5F5F7]">
+                <span className="text-xs sm:text-sm font-medium text-[#FFFFFF]">
                   {location}
                 </span>
               </div>
@@ -132,7 +132,7 @@ export const Contact: React.FC = () => {
 
             {/* Social Network Links */}
             <div>
-              <span className="text-xs font-mono uppercase tracking-widest text-[#A4A4B0]/70 block mb-3">
+              <span className="text-xs font-mono uppercase tracking-widest text-[#D8B4FE]/70 block mb-3">
                 Online Profiles
               </span>
               <div className="flex gap-3 text-xs font-mono">
@@ -140,67 +140,67 @@ export const Contact: React.FC = () => {
                   href={profiles.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-3.5 py-1.5 rounded-lg bg-white/[0.03] border border-white/[0.06] text-[#F5F5F7] hover:text-[#9B6DFF] transition-colors flex items-center gap-1"
+                  className="px-3.5 py-1.5 rounded-lg bg-[#160F25] border border-[#BF5AFF]/25 text-[#FFFFFF] hover:border-[#BF5AFF] hover:shadow-[0_0_10px_rgba(191,90,255,0.3)] transition-all flex items-center gap-1"
                 >
                   <span>LinkedIn</span>
-                  <ArrowUpRight size={11} />
+                  <ArrowUpRight size={11} className="text-[#BF5AFF]" />
                 </a>
                 <a
                   href={profiles.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-3.5 py-1.5 rounded-lg bg-white/[0.03] border border-white/[0.06] text-[#F5F5F7] hover:text-[#56BFFF] transition-colors flex items-center gap-1"
+                  className="px-3.5 py-1.5 rounded-lg bg-[#160F25] border border-[#BF5AFF]/25 text-[#FFFFFF] hover:border-[#BF5AFF] hover:shadow-[0_0_10px_rgba(191,90,255,0.3)] transition-all flex items-center gap-1"
                 >
                   <span>GitHub</span>
-                  <ArrowUpRight size={11} />
+                  <ArrowUpRight size={11} className="text-[#8B9CFF]" />
                 </a>
                 <a
                   href={profiles.leetcode}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-3.5 py-1.5 rounded-lg bg-white/[0.03] border border-white/[0.06] text-[#F5F5F7] hover:text-amber-300 transition-colors flex items-center gap-1"
+                  className="px-3.5 py-1.5 rounded-lg bg-[#160F25] border border-[#BF5AFF]/25 text-[#FFFFFF] hover:border-[#BF5AFF] hover:shadow-[0_0_10px_rgba(191,90,255,0.3)] transition-all flex items-center gap-1"
                 >
                   <span>LeetCode</span>
-                  <ArrowUpRight size={11} />
+                  <ArrowUpRight size={11} className="text-amber-300" />
                 </a>
               </div>
             </div>
 
           </div>
 
-          {/* Minimal Form */}
+          {/* Minimal Contact Form */}
           <div className="lg:col-span-7">
-            <form onSubmit={handleSubmit} className="p-6 sm:p-8 rounded-2xl bg-[#0D0E15]/50 border border-white/[0.06] space-y-4">
+            <form onSubmit={handleSubmit} className="p-6 sm:p-8 rounded-2xl bg-[#100B1B]/70 border border-[#BF5AFF]/20 backdrop-blur-xl space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs font-mono text-[#A4A4B0] block mb-1">
+                  <label className="text-xs font-mono text-[#D8B4FE] block mb-1">
                     Your Name *
                   </label>
                   <input
                     type="text"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.03] border border-white/[0.08] focus:border-[#9B6DFF] focus:outline-none text-xs text-[#F5F5F7] transition-colors"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#160F25] border border-[#BF5AFF]/20 focus:border-[#BF5AFF] focus:outline-none text-xs text-[#FFFFFF] transition-colors"
                   />
                   {errors.name && <span className="text-[10px] text-rose-400 font-mono mt-1 block">{errors.name}</span>}
                 </div>
 
                 <div>
-                  <label className="text-xs font-mono text-[#A4A4B0] block mb-1">
+                  <label className="text-xs font-mono text-[#D8B4FE] block mb-1">
                     Your Email *
                   </label>
                   <input
                     type="email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.03] border border-white/[0.08] focus:border-[#9B6DFF] focus:outline-none text-xs text-[#F5F5F7] transition-colors"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#160F25] border border-[#BF5AFF]/20 focus:border-[#BF5AFF] focus:outline-none text-xs text-[#FFFFFF] transition-colors"
                   />
                   {errors.email && <span className="text-[10px] text-rose-400 font-mono mt-1 block">{errors.email}</span>}
                 </div>
               </div>
 
               <div>
-                <label className="text-xs font-mono text-[#A4A4B0] block mb-1">
+                <label className="text-xs font-mono text-[#D8B4FE] block mb-1">
                   Subject
                 </label>
                 <input
@@ -208,19 +208,19 @@ export const Contact: React.FC = () => {
                   value={formData.subject}
                   onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                   placeholder="Inquiry / Collaboration"
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.03] border border-white/[0.08] focus:border-[#9B6DFF] focus:outline-none text-xs text-[#F5F5F7] transition-colors"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#160F25] border border-[#BF5AFF]/20 focus:border-[#BF5AFF] focus:outline-none text-xs text-[#FFFFFF] transition-colors"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-mono text-[#A4A4B0] block mb-1">
+                <label className="text-xs font-mono text-[#D8B4FE] block mb-1">
                   Message *
                 </label>
                 <textarea
                   rows={4}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.03] border border-white/[0.08] focus:border-[#9B6DFF] focus:outline-none text-xs text-[#F5F5F7] transition-colors resize-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#160F25] border border-[#BF5AFF]/20 focus:border-[#BF5AFF] focus:outline-none text-xs text-[#FFFFFF] transition-colors resize-none"
                 />
                 {errors.message && <span className="text-[10px] text-rose-400 font-mono mt-1 block">{errors.message}</span>}
               </div>
@@ -228,7 +228,7 @@ export const Contact: React.FC = () => {
               <button
                 type="submit"
                 onMouseEnter={() => soundEffects.playHover()}
-                className="w-full py-3 rounded-xl text-xs font-medium text-white bg-[#9B6DFF] hover:bg-[#8A58F5] transition-colors"
+                className="w-full py-3 rounded-xl text-xs font-medium text-[#FFFFFF] bg-[#BF5AFF] hover:bg-[#A855F7] neon-glow-btn transition-colors"
               >
                 Send Message
               </button>

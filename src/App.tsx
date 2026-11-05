@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Preloader } from './ui/Preloader';
 import { CustomCursor } from './ui/CustomCursor';
 import { BackgroundCanvas } from './3d/BackgroundCanvas';
+import { ButterflyCanvas } from './components/butterflies/ButterflyCanvas';
 import { Navbar } from './layout/Navbar';
 import { Footer } from './layout/Footer';
 import { Hero } from './sections/Hero';
@@ -20,20 +21,23 @@ export function App() {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
 
   return (
-    <div className="relative min-h-screen bg-[#08090D] text-[#F5F5F7] selection:bg-[#9B6DFF]/20 selection:text-[#F5F5F7]">
+    <div className="relative min-h-screen bg-[#080610] text-[#FFFFFF] selection:bg-[#BF5AFF]/30 selection:text-[#D8B4FE]">
       {/* Minimal Intro Preloader */}
       {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
 
       {/* Sleek Minimal Desktop Cursor */}
       <CustomCursor />
 
-      {/* Subtle Cinematic Ambient Backdrop */}
+      {/* Deep Midnight Purple Base Lighting */}
       <BackgroundCanvas />
 
-      {/* Floating Navigation */}
+      {/* Flying Purple Butterflies Engine (Smooth, Realistic Flight, Luminous Dust Trails) */}
+      <ButterflyCanvas />
+
+      {/* Floating Dark Glass Navigation */}
       <Navbar onOpenResume={() => setIsResumeOpen(true)} />
 
-      {/* Main Content */}
+      {/* Main Content Sections */}
       <main className="relative z-10">
         <Hero />
         <About />

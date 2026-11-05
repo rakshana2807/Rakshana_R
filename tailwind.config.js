@@ -8,19 +8,20 @@ export default {
   theme: {
     extend: {
       colors: {
-        dark: {
-          950: '#08090D', // Exact requested background
-          900: '#0D0E15',
-          850: '#12141D',
-          800: '#171A26',
-          700: '#222638',
+        midnight: {
+          950: '#080610', // Requested primary background
+          900: '#100B1B', // Requested secondary background
+          850: '#160F25',
+          800: '#1E1533',
+          700: '#2A1D47',
         },
-        luxury: {
-          violet: '#9B6DFF', // Soft violet requested
-          blue: '#56BFFF',   // Electric blue requested
-          white: '#F5F5F7',  // Clean text requested
-          grey: '#A4A4B0',   // Secondary soft grey requested
-          muted: '#6E6E7C',
+        butterfly: {
+          purple: '#A855F7',   // Primary purple
+          neon: '#BF5AFF',     // Neon violet
+          lavender: '#D8B4FE', // Electric lavender
+          blue: '#8B9CFF',     // Accent blue
+          text: '#FFFFFF',     // Main text
+          muted: '#B8AEC7',    // Secondary text
         }
       },
       fontFamily: {
@@ -29,17 +30,22 @@ export default {
         mono: ['"JetBrains Mono"', 'monospace'],
       },
       animation: {
-        'fade-in': 'fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-        'subtle-float': 'subtleFloat 7s ease-in-out infinite',
+        'fade-in': 'fadeIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+        'butterfly-flutter': 'flutter 0.35s ease-in-out infinite alternate',
+        'soft-glow': 'softGlow 4s ease-in-out infinite alternate',
       },
       keyframes: {
         fadeIn: {
-          '0%': { opacity: '0', transform: 'translateY(12px)' },
+          '0%': { opacity: '0', transform: 'translateY(10px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
-        subtleFloat: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-6px)' },
+        flutter: {
+          '0%': { transform: 'scaleX(1)' },
+          '100%': { transform: 'scaleX(0.2)' },
+        },
+        softGlow: {
+          '0%': { filter: 'drop-shadow(0 0 10px rgba(191,90,255,0.3))' },
+          '100%': { filter: 'drop-shadow(0 0 25px rgba(191,90,255,0.65))' },
         }
       }
     },
